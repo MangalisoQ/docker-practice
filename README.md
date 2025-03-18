@@ -1,18 +1,6 @@
 ## Docker Practice
 - Multi-container Docker application with Nginx reverse proxy, frontend, and backend services.
 
-### Project Strcucture
-
-├── backend
-│   ├── Dockerfile
-│   └── ...
-├── frontend
-│   ├── Dockerfile
-│   └── ...
-├── nginx-conf
-│   ├── nginx.conf
-└── docker-compose.yaml
-
 ### Prerequisites
 - Docker
 - Docker Compose
