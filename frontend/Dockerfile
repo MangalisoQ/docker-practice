@@ -25,5 +25,12 @@ ENV REACT_APP_BACKEND_URL=http://localhost/api
 
 EXPOSE 5000
 
+# create a non-root user and group
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+RUN chown appuser:appgroup .
+  
+ # change the user
+USER appuser
+
 CMD ["serve","-s","-l","5000","build"]
 

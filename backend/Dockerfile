@@ -27,5 +27,12 @@ EXPOSE 5002
 
 ENV REDIS_HOST=redis-serv POSTGRES_HOST=db POSTGRES_USER=postgres POSTGRES_PASSWORD=1234 POSTGRES_DATABASE=postgres
 
+# create a non-root user and group
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+RUN chown appuser:appgroup .
+
+# change the user
+USER appuser
+
 CMD ["./server"]
 
