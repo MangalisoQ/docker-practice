@@ -1,17 +1,27 @@
-# base
-FROM node:16
+# Stage 1: Build
+FROM node:16 AS build
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install && npm install -g serve
+RUN npm install
 
 COPY . .
 
-ENV REACT_APP_BACKEND_URL=http://localhost/api
-
 RUN npm run build
+
+# Stage 2: Execution
+
+FROM node:16-alpine
+
+WORKDIR /usr/src/app
+
+COPY --from=build /usr/src/app/build ./build
+
+RUN npm install -g serve
+
+ENV REACT_APP_BACKEND_URL=http://localhost/api
 
 EXPOSE 5000
 
